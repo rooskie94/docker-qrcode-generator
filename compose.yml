@@ -1,7 +1,7 @@
-version: '3'
-
 services:
-  app:
-    build: .
+  qrcode-generator:
+    image: rooskie94/docker-qrcode-generator:latest
+    container_name: qrcode-generator
     ports:
       - "8080:8080"
+    restart: unless-stopped
