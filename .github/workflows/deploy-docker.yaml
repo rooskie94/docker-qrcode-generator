@@ -1,0 +1,14 @@
+name: Build and Publish Docker Image
+on: [workflow_dispatch]
+jobs:
+    publish_image:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout
+              uses: actions/checkout@v6
+            - name: build image
+              run: docker build . --file Dockerfile --tag docker-qrcode-generator:latest
+            - name: publish image
+              run: |
+                docker login -u rooskie94 -p ${{ secrets.DOCKER_HUB_TOKEN }}
+                docker push rooskie94/docker-qrcode-generator:latest
