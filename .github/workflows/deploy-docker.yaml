@@ -1,5 +1,10 @@
 name: Build and Publish Docker Image
-on: [workflow_dispatch]
+on: 
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    
 jobs:
     publish_image:
         runs-on: ubuntu-latest
