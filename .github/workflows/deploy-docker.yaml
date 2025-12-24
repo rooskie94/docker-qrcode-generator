@@ -1,14 +1,45 @@
 name: Build and Publish Docker Image
-on: [workflow_dispatch]
+on: 
+  push:
+    branches:
+      - main
+      - dev
+  workflow_dispatch:
+  pull_request:
+    
 jobs:
-    publish_image:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout
+              uses: actions/checkout@v6
+            - name: install dependencies
+              run: pip install -r requirements.txt
+    
+    docker-build:
+        needs: test
         runs-on: ubuntu-latest
         steps:
             - name: checkout
               uses: actions/checkout@v6
             - name: build image
               run: docker build . --file Dockerfile --tag rooskie94/docker-qrcode-generator:latest
+            - name: Run container
+              run: |
+                docker run -d -p 8080:8080 --name qrcode-generator rooskie94/docker-qrcode-generator:latest
+                sleep 5
+                echo "sleep for 5 seconds"
+            - name: run tests
+              run: curl localhost:8080
+  
+    publish:
+        needs: docker-build
+        runs-on: ubuntu-latest
+        if: github.ref == 'refs/heads/main'
+        steps:
+            - name: checkout
+              uses: actions/checkout@v6
             - name: publish image
               run: |
-                docker login -u rooskie94 -p ${{ secrets.DOCKER_HUB_TOKEN }}
+                docker login -u ${{ secrets.DOCKER_USER_NAME }} -p ${{ secrets.DOCKER_HUB_TOKEN }}
                 docker push rooskie94/docker-qrcode-generator:latest
