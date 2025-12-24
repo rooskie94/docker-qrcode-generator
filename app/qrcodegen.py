@@ -2,6 +2,9 @@ import qrcode
 import os
 import re
 
+if not os.path.exists("qrcodes"):
+    os.mkdir("qrcodes")
+    
 
 def safe_filename(text: str) -> str:
     # Replace anything not alphanumeric with _
@@ -20,7 +23,6 @@ def generate_qr_code(url: str) -> str:
     qr.make(fit=True)
 
     img = qr.make_image(fill_color="black", back_color="white")
-
     base = safe_filename(url)
     i = 1
     filename = f"qrcodes/qrcode-{base}-{i}.png"
