@@ -24,6 +24,9 @@ jobs:
               uses: actions/checkout@v6
             - name: build image
               run: docker build . --file Dockerfile --tag rooskie94/docker-qrcode-generator:latest
+            - name: Run container
+              run: |
+                docker run -d -p 8080:8080 --name qrcode-generator rooskie94/docker-qrcode-generator:latest
             - name: run tests
               run: curl localhost:8080
   
