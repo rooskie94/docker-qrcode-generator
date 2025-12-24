@@ -8,7 +8,7 @@ if not os.path.exists("qrcodes"):
 
 def safe_filename(text: str) -> str:
     # Replace anything not alphanumeric with _
-    return re.sub(r'[^a-zA-Z0-9_-]', '_', text)
+    return re.sub(r'[^a-zA-Z0-9_-]', '', text)
 
 
 def generate_qr_code(url: str) -> str:

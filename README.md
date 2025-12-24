@@ -12,6 +12,7 @@ The app provides a simple web interface where you:
 ## Features
 
 - Simple web UI
+- Dark Mode
 - Generates downloadable QR codes
 
 ---
