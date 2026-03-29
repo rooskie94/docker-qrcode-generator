@@ -1,8 +1,9 @@
 # Docker QR Code Generator
 
-A lightweight web-based QR code generator built with Python and packaged as a Docker container.
+A lightweight web-based QR code generator built with Python and packaged as a Docker container. <br>
 
-<img width="2545" height="733" alt="Screen Shot 2025-12-24 at 13 27 43 PM" src="https://github.com/user-attachments/assets/7a15b423-7cd7-481d-88b8-deb40ca6d821" />
+<img width="1586" height="503" alt="Screen Shot 2026-03-29 at 13 10 06 PM" src="https://github.com/user-attachments/assets/75191788-8eaa-4fd9-84da-39d60cd8688a" /> <br>
+
 
 The app provides a simple web interface where you:
 1. Enter a URL  
